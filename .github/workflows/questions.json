@@ -1,0 +1,423 @@
+[
+    {
+        "question": "When treating for Extreme Heat Exhaustion with a patient over 104 Degrees Fahrenheit, what can you do to cool them down?",
+        "answer": "Ice Packs, Ice Bath",
+        "options": ["Take a Nap", "Drink Water", "Ice Packs, Ice Bath", "Call 911"],
+        "explanation": "When a patient's body temperature exceeds 104°F, immediate and aggressive cooling is necessary. Ice packs applied to the groin, armpits, and neck, or an ice bath, help rapidly reduce core temperature. While hydration is important, it's not sufficient alone for severe cases. Emergency services should be contacted while cooling measures are being taken."
+    },
+    {
+        "question": "What is the adult dose for oral glucose?",
+        "answer": "12-25g",
+        "options": ["30g", "12-25g", "15g", "15-40g"],
+        "explanation": "The typical adult dose for oral glucose is 12-25 grams, used to treat hypoglycemia (low blood sugar). This helps raise blood sugar levels to a normal range."
+    },
+    {
+        "question": "What is the average adult blood pressure?",
+        "answer": "120/80",
+        "options": ["80/120", "100/80", "120/80", "100"],
+        "explanation": "The average adult blood pressure is 120/80 mmHg, often considered 'normal.' Blood pressure readings represent systolic pressure (the pressure when the heart beats) over diastolic pressure (the pressure when the heart is at rest). Variations from this can indicate possible health concerns."
+    },
+    {
+        "question": "What is the average adult temperature?",
+        "answer": "98.6F",
+        "options": ["98.6F", "98F", "96.8F", "98.6C"],
+        "explanation": "The average adult body temperature is around 98.6°F (37°C), though it can vary slightly depending on the individual, the time of day, and other factors. This temperature is considered normal for a healthy adult."
+    },
+    {
+        "question": "What is the average adult Respiration rate?",
+        "answer": "12-20BPM",
+        "options": ["14-20BPM", "16-25BPM", "18-30BPM", "12-20BPM"],
+        "explanation": "An adult's average respiration rate is 12-20 breaths per minute (BPM). A rate outside of this range may indicate a respiratory issue or other health concern."
+    },
+    {
+        "question": "What is the average adult Heart Rate?",
+        "answer": "60-100 BPM",
+        "options": ["50-70 BPM", "60-100 BPM", "70-110 BPM", "80-120 BPM"],
+        "explanation": "The normal resting heart rate for adults is typically between 60 and 100 beats per minute (BPM). A heart rate outside this range, especially higher or lower, may require further investigation."
+    },
+    {
+        "question": "What is the average adult oxygen saturation?",
+        "answer": "95-100%",
+        "options": ["90-95%", "92-98%", "95-100%", "98-100%"],
+        "explanation": "Normal oxygen saturation levels for a healthy adult range between 95% and 100%. Levels below 90% may indicate hypoxemia, a potentially dangerous condition that requires intervention."
+    },
+    {
+        "question": "What is the average adult capillary refill time?",
+        "answer": "2 seconds or less",
+        "options": ["5 seconds or more", "3 seconds or less", "1 Second", "2 seconds or less"],
+        "explanation": "Capillary refill time is used to assess circulation. It should be 2 seconds or less. A longer time may indicate poor circulation, which could be a sign of a serious issue."
+    },
+    {
+        "question": "What is considered low oxygen saturation for an adult?",
+        "answer": "Below 90%",
+        "options": ["Below 90%", "Below 95%", "Below 80%", "Below 75%"],
+        "explanation": "Oxygen saturation levels below 90% are considered low and indicate hypoxemia, which can be life-threatening and requires immediate medical attention."
+    },
+    {
+        "question": "What is the classification for Albuterol?",
+        "answer": "Bronchodilator",
+        "options": ["Asthma", "Pain relief", "Bronchodilator", "Chest Pain"],
+        "explanation": "Albuterol is classified as a bronchodilator, a medication that helps to open airways in the lungs, commonly used for asthma and other respiratory conditions."
+    },
+    {
+        "question": "What is the Pediatric dose for oral glucose?",
+        "answer": "12-25g",
+        "options": ["15-20g", "5g", "12-25g", "10-20g"],
+        "explanation": "The pediatric dose of oral glucose is also 12-25 grams, depending on the child's weight and condition. This helps address low blood sugar in children."
+    },
+    {
+        "question": "What is the Adult dose for Aspirin?",
+        "answer": "324mg",
+        "options": ["200mg", "324mg", "400mg", "500mg"],
+        "explanation": "The standard adult dose of aspirin in cases of suspected heart attack (AMI) is 324 mg, which helps reduce blood clotting and prevent further complications."
+    },
+    {
+        "question": "What is the indication for Aspirin?",
+        "answer": "if suspected AMI",
+        "options": ["Pain Relief", "Chest Pain", "If suspected AMI", "Asthma"],
+        "explanation": "Aspirin is commonly administered if an acute myocardial infarction (AMI, or heart attack) is suspected, as it helps prevent blood clotting and minimizes damage to the heart."
+    },
+    {
+        "question": "What is the oxygen flow rate for a Nasal Cannula?",
+        "answer": "1-6 LPM",
+        "options": ["1-6 LPM", "6-8 LPM", "10-12 LPM", "15-20 LPM"],
+        "explanation": "The oxygen flow rate for a nasal cannula is typically between 6-8 liters per minute (LPM), providing low to moderate oxygen support for patients."
+    },
+    {
+        "question": "What is the oxygen flow rate for a Nebulizer?",
+        "answer": "6-8 LPM",
+        "options": ["2-4 LPM", "6-8 LPM", "12-15 LPM", "18-20 LPM"],
+        "explanation": "A nebulizer typically operates at a flow rate of 6-8 liters per minute (LPM), delivering medication directly into the lungs in aerosol form."
+    },
+    {
+        "question": "What is the oxygen flow rate for a Non Rebreather?",
+        "answer": "10-15 LPM",
+        "options": ["6-10 LPM", "8-10 LPM", "10-15 LPM", "15-20 LPM"],
+        "explanation": "The oxygen flow rate for a non-rebreather mask is typically between 10-15 LPM. This mask provides a high concentration of oxygen to the patient."
+    },
+    {
+        "question": "What is the oxygen flow rate for a BVM?",
+        "answer": "25 LPM",
+        "options": ["10 LPM", "15 LPM", "25 LPM", "30 LPM"],
+        "explanation": "A Bag-Valve-Mask (BVM) is used to assist with ventilation during CPR, and the recommended oxygen flow rate is 25 LPM to ensure adequate oxygen delivery."
+    },
+    {
+        "question": "What is the adult dose for Aspirin in suspected chest pain?",
+        "answer": "160-325 mg",
+        "options": ["80-160 mg", "160-325 mg", "400-500 mg", "325-400 mg"],
+        "explanation": "In cases of suspected chest pain, the adult dose for aspirin is 160-325 mg, which helps prevent further clotting and manage heart attack risk."
+    },
+    {
+        "question": "What medication is used to treat anaphylaxis?",
+        "answer": "Epinephrine",
+        "options": ["Diphenhydramine", "Epinephrine", "Atropine", "Albuterol"],
+        "explanation": "Epinephrine is the first-line treatment for anaphylaxis. It rapidly constricts blood vessels and relaxes airway muscles to counteract the severe allergic reaction."
+    },
+    {
+        "question": "How long do you check for a pulse before beginning CPR?",
+        "answer": "10 Seconds",
+        "options": ["5 Seconds", "10 Seconds", "15 Seconds", "30 Seconds"],
+        "explanation": "You should check for a pulse for no more than 10 seconds. If no pulse is felt, immediately begin CPR to prevent brain damage and organ failure."
+    },
+    {
+        "question": "If the patient has sudden gasps of Air during CPR what do you do?",
+        "answer": "Continue CPR",
+        "options": ["Stop and Check", "Continue CPR", "Give Oxygen", "Perform Rescue Breaths"],
+        "explanation": "If a patient exhibits gasping or irregular breathing during CPR, continue with chest compressions and rescue breaths until medical help arrives."
+    },
+    {
+        "question": "How deep should you do chest compressions?",
+        "answer": "2-2.4 inches",
+        "options": ["1-1.5 inches", "1.5-2 inches", "2-2.4 inches", "2.5-3 inches"],
+        "explanation": "Chest compressions should be performed at a depth of 2-2.4 inches for adults. This depth is optimal for maintaining circulation during CPR."
+    },
+    {
+        "question": "How fast should compressions be done?",
+        "answer": "100-120 bpm",
+        "options": ["60-80 bpm", "100-120 bpm", "120-140 bpm", "150 bpm"],
+        "explanation": "Compressions should be performed at a rate of 100-120 beats per minute (bpm) to maintain effective circulation during CPR."
+    },
+    {
+        "question": "How often should rescuers switch roles during two-person CPR to prevent fatigue?",
+        "answer": "Every 2 minutes or after 5 cycles",
+        "options": ["Every 1 minute", "Every 2 minutes or after 5 cycles", "Every 3 minutes", "Every 5 minutes"],
+        "explanation": "In two-person CPR, rescuers should switch roles every 2 minutes or after 5 cycles of chest compressions to avoid fatigue and maintain effective compressions."
+    },
+    {
+        "question": "At what rate should you deliver rescue breaths when using an advanced airway?",
+        "answer": "1 breath every 6 seconds",
+        "options": ["1 breath every 3 seconds", "1 breath every 6 seconds", "1 breath every 5 seconds", "1 breath every 10 seconds"],
+        "explanation": "When using an advanced airway, deliver 1 breath every 6 seconds to allow for proper ventilation and oxygenation."
+    },
+    {
+        "question": "How do you apply AED pads?",
+        "answer": "One pad above the right nipple and the other pad placed on the left side, below the chest",
+        "options": ["One pad on the chest and one on the back", "One pad above the right nipple and the other pad placed on the left side, below the chest", "Place both pads on the chest", "Place both pads on the back"],
+        "explanation": "AED pads should be placed as shown in the answer, ensuring proper placement for effective defibrillation."
+    },
+    {
+        "question": "Order the five Key elements in a first aid response.",
+        "answer": "Scene Safety, Check for responsiveness, Asses for breathing and pulse, Call 911 and get an AED, Initiate CPR",
+        "options": [
+            "Call 911, Check for responsiveness, Scene Safety, Initiate CPR, Assess for breathing and pulse",
+            "Scene Safety, Call 911, Check for responsiveness, Assess for breathing and pulse, Initiate CPR",
+            "Scene Safety, Check for responsiveness, Asses for breathing and pulse, Call 911 and get an AED, Initiate CPR",
+            "Scene Safety, Call 911, Check for responsiveness, Initiate CPR, Assess for breathing and pulse"
+        ],
+        "explanation": "The correct order of actions in a first aid response ensures the safety of both the responder and the patient while providing timely medical assistance."
+    },
+    {
+        "question": "What is the proper depth for chest compressions in infants?",
+        "answer": "1.5 inches",
+        "options": ["1 inch", "1.5 inches", "2 inches", "2.4 inches"],
+        "explanation": "For infants, chest compressions should be 1.5 inches deep. This depth is necessary for effective circulation without causing harm to the infant."
+    },
+    {
+        "question": "What is the acronym used to remember key aspects of a patient history?",
+        "answer": "SAMPLE",
+        "options": [
+            "SAMPLE",
+            "FAST",
+            "OPQRST",
+            "ABC"
+        ],
+        "explanation": "SAMPLE is a mnemonic device used to gather essential patient history information in emergency situations. Each letter represents a key aspect of information that needs to be collected."
+    },
+    {
+        "question": "What is the first step when treating a suspected broken bone?",
+        "answer": "Immobilize the area",
+        "options": [
+            "Apply ice",
+            "Immobilize the area",
+            "Check for bleeding",
+            "Move the limb to check range of motion"
+        ],
+        "explanation": "When dealing with a suspected broken bone, immobilization is the first priority to prevent further injury and reduce pain. This helps prevent bone fragments from causing additional damage."
+    },
+    {
+        "question": "How long should you cool a burn with water?",
+        "answer": "At least 10 minutes",
+        "options": [
+            "5 minutes",
+            "At least 10 minutes",
+            "15-20 minutes",
+            "Until pain stops"
+        ],
+        "explanation": "Burns should be cooled with clean, cool water for at least 10 minutes. This helps reduce tissue damage and relieve pain."
+    },
+    {
+        "question": "What are the signs of shock?",
+        "answer": "Pale, cool, clammy skin, rapid pulse, weakness, confusion",
+        "options": [
+            "Pale, cool, clammy skin, rapid pulse, weakness, confusion",
+            "Red face, slow pulse, strength, clarity",
+            "Warm skin, normal pulse, alertness",
+            "Hot skin, slow breathing, normal color"
+        ],
+        "explanation": "Shock is a life-threatening condition where the body isn't getting enough blood flow. These signs indicate decreased circulation and the body's stress response."
+    },
+    {
+        "question": "What are the ABC's that a responder uses to help a patient?",
+        "answer": "Airway, Breathing, Circulation",
+        "options": [
+            "Airway, Breathing, Circulation",
+            "Alert, Breathing, Conscious",
+            "Assessment, Breathing, Compression",
+            "Awake, Blood pressure, Consciousness"
+        ],
+        "explanation": "ABC stands for Airway, Breathing, Circulation. This is the primary assessment sequence used to quickly evaluate and treat life-threatening conditions."
+    },
+    {
+        "question": "What does APGAR stand for?",
+        "answer": "Appearance, Pulse Rate, Grimace, Activity, Respiratory Effort",
+        "options": [
+            "Appearance, Pulse Rate, Grimace, Activity, Respiratory Effort",
+            "Alert, Pain, Glucose, Airway, Response",
+            "Assessment, Pulse, Glucose, Airway, Respiration",
+            "Appearance, Pressure, Glucose, Activity, Response"
+        ],
+        "explanation": "The APGAR score is used to evaluate newborns immediately after birth. Each component is scored to assess the baby's condition and need for immediate care."
+    },
+    {
+        "question": "What is the compression to breath ratio for single-rescuer adult CPR?",
+        "answer": "30:2",
+        "options": ["15:2", "30:2", "15:1", "20:2"],
+        "explanation": "For single-rescuer adult CPR, perform 30 compressions followed by 2 breaths. This ratio maximizes blood circulation while maintaining adequate oxygenation."
+    },
+    {
+        "question": "What is the compression to breath ratio for two-rescuer infant/child CPR?",
+        "answer": "15:2",
+        "options": ["30:2", "15:2", "15:1", "20:2"],
+        "explanation": "For two-rescuer CPR on infants and children, the ratio is 15 compressions to 2 breaths. This higher ventilation rate accounts for the primary respiratory nature of most pediatric arrests."
+    },
+    {
+        "question": "What is the compression to breath ratio for single-rescuer infant/child CPR?",
+        "answer": "30:2",
+        "options": ["15:2", "30:2", "15:1", "20:2"],
+        "explanation": "For single-rescuer infant/child CPR, perform 30 compressions followed by 2 breaths, the same as adult CPR. This standardization helps with retention and performance."
+    },
+    {
+        "question": "What is the proper compression rate for adult CPR?",
+        "answer": "100-120 per minute",
+        "options": ["80-100 per minute", "100-120 per minute", "120-140 per minute", "60-80 per minute"],
+        "explanation": "Adult chest compressions should be performed at a rate of 100-120 compressions per minute to maintain effective circulation."
+    },
+    {
+        "question": "What is the proper compression rate for child CPR?",
+        "answer": "100-120 per minute",
+        "options": ["80-100 per minute", "100-120 per minute", "120-140 per minute", "60-80 per minute"],
+        "explanation": "Child chest compressions should be performed at a rate of 100-120 compressions per minute, the same as adult CPR."
+    },
+    {
+        "question": "What is the proper compression rate for infant CPR?",
+        "answer": "100-120 per minute",
+        "options": ["80-100 per minute", "100-120 per minute", "120-140 per minute", "60-80 per minute"],
+        "explanation": "Infant chest compressions should be performed at a rate of 100-120 compressions per minute, maintaining consistency across all age groups."
+    },
+    {
+        "question": "What is the proper compression depth for adult CPR?",
+        "answer": "2-2.4 inches",
+        "options": ["1-1.5 inches", "1.5-2 inches", "2-2.4 inches", "2.5-3 inches"],
+        "explanation": "Adult chest compressions should be 2-2.4 inches deep to effectively compress the heart and maintain circulation."
+    },
+    {
+        "question": "What is the proper compression depth for child CPR?",
+        "answer": "About 2 inches",
+        "options": ["1 inch", "About 2 inches", "2.4 inches", "3 inches"],
+        "explanation": "For children, compress the chest about 2 inches (approximately 1/3 the depth of the chest) to ensure adequate blood flow."
+    },
+    {
+        "question": "What is the proper compression depth for infant CPR?",
+        "answer": "1.5 inches",
+        "options": ["1 inch", "1.5 inches", "2 inches", "2.4 inches"],
+        "explanation": "For infants, compress the chest approximately 1.5 inches (approximately 1/3 the depth of the chest) to ensure adequate blood flow without causing injury."
+    },
+    {
+        "question": "What is the ventilation rate when using an advanced airway on an adult patient during CPR?",
+        "answer": "1 breath every 6 seconds",
+        "options": ["1 breath every 2 seconds", "1 breath every 4 seconds", "1 breath every 6 seconds", "1 breath every 8 seconds"],
+        "explanation": "When an advanced airway is in place during CPR, provide 1 breath every 6 seconds (10 breaths per minute) while continuous compressions are being performed."
+    },
+    {
+        "question": "What is the proper hand position for infant chest compressions?",
+        "answer": "2 fingers just below nipple line",
+        "options": ["2 hands center of chest", "1 hand center of chest", "2 fingers just below nipple line", "2 thumbs center of chest"],
+        "explanation": "For infant CPR, use 2 fingers just below the nipple line for compressions. This technique provides appropriate depth while preventing excessive force."
+    },
+    {
+        "question": "What is the proper hand position for child chest compressions?",
+        "answer": "1 or 2 hands center of chest",
+        "options": ["2 fingers only", "1 or 2 hands center of chest", "2 thumbs only", "2 hands only"],
+        "explanation": "For child CPR, use either 1 or 2 hands on the lower half of the sternum, depending on the child's size and rescuer's ability to achieve proper depth."
+    },
+    {
+        "question": "A child is having an asthma attack. What is the appropriate first response?",
+        "answer": "Use their inhaler if available, otherwise administer albuterol via nebulizer",
+        "options": [
+            "Give them water",
+            "Make them lie down",
+            "Use their inhaler if available, otherwise administer albuterol via nebulizer",
+            "Call 911 immediately without other interventions"
+        ],
+        "explanation": "For an asthma attack, the quickest relief comes from bronchodilator medication. Use the patient's prescribed inhaler if available, or administer albuterol via nebulizer. This helps open the airways quickly."
+    },
+    {
+        "question": "An adult suddenly clutches their chest, complains of pressure and pain radiating to their left arm. What is your first medication intervention?",
+        "answer": "Give 324mg of Aspirin and have them chew it",
+        "options": [
+            "Give them water",
+            "Give 324mg of Aspirin and have them chew it",
+            "Give them nitroglycerin",
+            "Give them ibuprofen"
+        ],
+        "explanation": "In suspected cardiac events, having the patient chew aspirin helps it work faster. Aspirin helps prevent further clotting. Always call 911 first and then administer aspirin if no contraindications exist."
+    },
+    {
+        "question": "A diabetic patient is conscious but confused and shaky. What should you do?",
+        "answer": "Give oral glucose or sugar-containing drink if they can swallow safely",
+        "options": [
+            "Give insulin",
+            "Have them lie down and rest",
+            "Give oral glucose or sugar-containing drink if they can swallow safely",
+            "Give them water"
+        ],
+        "explanation": "These are signs of hypoglycemia (low blood sugar). If the patient can swallow safely, giving oral glucose or sugar-containing beverages can quickly raise blood sugar levels."
+    },
+    {
+        "question": "A person was stung by a bee and is developing hives and having difficulty breathing. What is your first action?",
+        "answer": "Administer epinephrine via auto-injector if available",
+        "options": [
+            "Give them diphenhydramine (Benadryl)",
+            "Apply ice to the sting",
+            "Administer epinephrine via auto-injector if available",
+            "Have them drink water"
+        ],
+        "explanation": "These are signs of anaphylaxis, a severe allergic reaction. Epinephrine is the first-line treatment and should be administered immediately while calling 911."
+    },
+    {
+        "question": "A child is having a seizure. What should you do?",
+        "answer": "Clear the area and protect their head, time the seizure",
+        "options": [
+            "Try to hold them still",
+            "Put something in their mouth",
+            "Clear the area and protect their head, time the seizure",
+            "Give them water immediately"
+        ],
+        "explanation": "During a seizure, protect the person from injury by clearing the area and cushioning their head. Never put anything in their mouth. Time the seizure for medical personnel."
+    },
+    {
+        "question": "An elderly person has fallen and hit their head. They take blood thinners. What should you do?",
+        "answer": "Call 911, keep them still, monitor consciousness",
+        "options": [
+            "Help them up and walk it off",
+            "Apply ice and send them home",
+            "Call 911, keep them still, monitor consciousness",
+            "Give them aspirin"
+        ],
+        "explanation": "Head injuries in patients on blood thinners are high-risk for internal bleeding. They require immediate medical evaluation, even if they seem fine initially."
+    },
+    {
+        "question": "A person has been exposed to extreme cold and their fingers are white and numb. What should you do?",
+        "answer": "Gradually rewarm with warm (not hot) water, avoid direct heat",
+        "options": [
+            "Rub snow on the affected area",
+            "Apply direct heat like a heating pad",
+            "Gradually rewarm with warm (not hot) water, avoid direct heat",
+            "Massage the affected area vigorously"
+        ],
+        "explanation": "This is frostbite. Gradual rewarming with warm (not hot) water is best. Avoid direct heat sources and don't rub the affected area as this can cause tissue damage."
+    },
+    {
+        "question": "A person is experiencing heat exhaustion on a hot day. What should you do?",
+        "answer": "Move to cool area, remove excess clothing, give cool fluids if alert",
+        "options": [
+            "Give them hot drinks",
+            "Have them exercise to 'sweat it out'",
+            "Move to cool area, remove excess clothing, give cool fluids if alert",
+            "Put them in an ice bath immediately"
+        ],
+        "explanation": "For heat exhaustion, the priority is cooling the person gradually and rehydrating. Move them to a cool area, remove excess clothing, and provide cool fluids if they're alert and can drink safely."
+    },
+    {
+        "question": "A child has swallowed a household cleaning product. What should you do?",
+        "answer": "Call Poison Control, do not induce vomiting",
+        "options": [
+            "Make them drink milk",
+            "Induce vomiting",
+            "Call Poison Control, do not induce vomiting",
+            "Give them water to dilute it"
+        ],
+        "explanation": "Never induce vomiting without professional guidance as this can cause additional harm. Call Poison Control immediately for specific instructions based on the substance ingested."
+    },
+    {
+        "question": "A person has a nosebleed that won't stop after 15 minutes of direct pressure. What should you do?",
+        "answer": "Seek immediate medical care",
+        "options": [
+            "Lean head back",
+            "Apply ice to the back of the neck only",
+            "Seek immediate medical care",
+            "Blow nose forcefully to clear blood"
+        ],
+        "explanation": "If direct pressure for 15 minutes doesn't stop the bleeding, professional medical evaluation is needed, especially if the person takes blood thinners or has high blood pressure."
+    }
+]

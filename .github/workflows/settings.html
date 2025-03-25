@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - MRC App</title>
+    <script type="module" src="firebase.js"></script>
+</head>
+<body>
+    <h1>App Settings</h1>
+    <form id="settings-form">
+        <h2>Select Number of Questions:</h2>
+        <label for="questionsMode1">
+            <input type="radio" id="questionsMode1" name="questionsMode" value="1-per-day">
+            1 Question per day
+        </label><br>
+        <label for="questionsMode7">
+            <input type="radio" id="questionsMode7" name="questionsMode" value="7-per-day">
+            7 Questions in one day
+        </label><br><br>
+        <button type="submit">Save Settings</button>
+    </form>
+    
+    <button id="logout-btn">Logout</button>
+
+    <script>
+        // Ensure the user is signed in, otherwise redirect to login page
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        if (!user) {
+            window.location.href = 'login.html'; // Redirect to login page if not signed in
+        }
+
+        document.getElementById('settings-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const selectedMode = document.querySelector('input[name="questionsMode"]:checked')?.value;
+            if (!selectedMode) {
+                alert('Please select a mode.');
+                return;
+            }
+
+            const settings = { questionsMode: selectedMode };
+
+            // Save the settings to Firebase
+            try {
+                await saveSettings(user.uid, settings);
+                alert('Settings saved successfully!');
+            } catch (error) {
+                alert('Error saving settings.');
+                console.error(error);
+            }
+        });
+
+        // Handle logout
+        document.getElementById('logout-btn').addEventListener('click', async function() {
+            await signOutUser();
+        });
+    </script>
+</body>
+</html>

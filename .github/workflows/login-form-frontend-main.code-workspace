@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../../Downloads/login-form-frontend-main"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "VS"
+	}
+}

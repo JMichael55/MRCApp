@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        /* Add some padding to the body to ensure no overflow */
+        body {
+            padding: 20px;
+        }
+
+        .question-list {
+            margin-top: 20px;
+            list-style-type: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Styling the clickable answer bubble */
+        .answer-option {
+            display: block;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 20px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s ease;
+        }
+
+        .answer-option:hover {
+            background-color: #e1e1e1;
+        }
+
+        .answer-option.selected {
+            background-color: #4CAF50;  /* Green when selected */
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Optionally, style the radio buttons to be more discrete */
+        input[type="radio"] {
+            margin-right: 10px;
+            visibility: hidden;
+        }
+
+        /* Ensuring selected state is reflected visually when radio is checked */
+        input[type="radio"]:checked + .answer-option {
+            background-color: #4CAF50;  /* Green */
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Add a transition effect when hovering or clicking */
+        input[type="radio"]:checked + .answer-option:hover {
+            background-color: #45a049;
+        }
+
+        /* Feedback box styling */
+        #feedbackBox {
+            margin: 20px auto;
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 600px;
+            text-align: center;
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .correct-feedback {
+            background-color: #dff2bf;
+            border: 1px solid #4CAF50;
+            color: #4F8A10;
+        }
+
+        .incorrect-feedback {
+            background-color: #ffdddd;
+            border: 1px solid #f44336;
+            color: #d8000c;
+        }
+
+        #feedbackMessage {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        #correctAnswer {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        #explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            text-align: left;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Dashboard!</h1>
+    <h2 id="questionDisplay">Question will appear here</h2>
+
+    <div id="choicesSection" class="hidden">
+        <ul id="choicesList"></ul>
+        <button id="submitAnswerButton">Submit Answer</button>
+    </div>
+
+    <!-- Feedback box -->
+    <div id="feedbackBox">
+        <div id="feedbackMessage"></div>
+        <div id="correctAnswer"></div>
+        <div id="explanation"></div>
+    </div>
+
+    <button id="nextButton">Next Question</button>
+    <button id="logoutButton">Logout</button>
+
+    <!-- Question Bank Lists -->
+    <h3>Remaining Questions</h3>
+    <div class="question-list">
+        <ul id="remainingQuestionsList"></ul>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBHOJmtUa8S4m0O50n2K6czLFZLvpcPkFc",
+            authDomain: "medly-5582c.firebaseapp.com",
+            projectId: "medly-5582c",
+            storageBucket: "medly-5582c.appspot.com",
+            messagingSenderId: "317679786195",
+            appId: "1:317679786195:web:e0705312e9fea4430fdc26",
+            measurementId: "G-14JEPWZLFV"
+        };
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const db = getFirestore(app);
+    
+        // Global variables
+        let userData = {};
+        let questionBank = [];
+        let score = 0;  // Track the score
+        let typedKeys = '';
+        const secretWord = 'admin';
+        let adminMode = false;
+        const QUESTIONS_PER_WEEK = 10;
+
+        // Add a new variable to track answered questions
+        let answeredQuestions = new Set();
+
+        // Feedback messages configuration
+        let feedbackMessages = {
+            correct: {
+                default: "Great job! That's the correct answer."
+            },
+            incorrect: {
+                default: "That's not quite right."
+            }
+        };
+    
+        let currentQuestionIndex = 0;
+    
+        // Protect the dashboard from unauthorized access
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = "index.html"; // Redirect if not logged in
+            } else {
+                console.log("User logged in:", user.email);
+                loadUserData(user.uid);
+            }
+        });
+    
+        // Load question data from JSON file
+        async function loadQuestions() {
+            const response = await fetch('questions.json'); // Fetch the JSON file
+            if (response.ok) {
+                questionBank = await response.json();
+                console.log("Loaded questions:", questionBank.length);
+            } else {
+                console.error('Failed to load questions data.');
+            }
+        }
+    
+        // Load user data from Firestore
+        async function loadUserData(userId) {
+            const docRef = doc(db, "users", userId);
+            const docSnap = await getDoc(docRef);
+            
+            if (docSnap.exists()) {
+                userData = docSnap.data();
+                console.log("User data loaded:", userData);
+                
+                // Initialize or update weekly questions
+                if (!userData.weeklyQuestions) {
+                    userData.weeklyQuestions = [];
+                }
+                if (!userData.lastWeekTimestamp) {
+                    userData.lastWeekTimestamp = Date.now();
+                }
+                if (!userData.answeredWeeklyQuestions) {
+                    userData.answeredWeeklyQuestions = [];
+                }
+                
+                // Initialize other necessary fields
+                if (!userData.questionWeights) {
+                    userData.questionWeights = {};
+                }
+                if (!userData.feedbackMessages) {
+                    userData.feedbackMessages = feedbackMessages;
+                }
+                
+                // First load all questions
+                await loadQuestions();
+                
+                // Then check and update weekly questions
+                await checkAndUpdateWeeklyQuestions();
+                
+                // Restore answered questions from Firebase
+                answeredQuestions = new Set(userData.answeredWeeklyQuestions);
+                
+            } else {
+                console.log("No user data found, initializing new data.");
+                userData = {
+                    correctQuestions: [],
+                    incorrectQuestions: [],
+                    feedbackMessages: feedbackMessages,
+                    questionWeights: {},
+                    weeklyQuestions: [],
+                    lastWeekTimestamp: Date.now(),
+                    answeredWeeklyQuestions: []
+                };
+                await setDoc(docRef, userData);
+                
+                // Load questions and assign initial weekly set
+                await loadQuestions();
+                await assignNewWeeklyQuestions();
+                await updateUserData();
+            }
+            
+            // Finally, update the question bank to show only weekly questions
+            updateQuestionBank();
+        }
+    
+        // Add function to check and update weekly questions
+        async function checkAndUpdateWeeklyQuestions() {
+            const currentTime = Date.now();
+            const oneWeek = 7 * 24 * 60 * 60 * 1000;
+            
+            if (currentTime - userData.lastWeekTimestamp >= oneWeek) {
+                console.log("New week started - assigning new questions");
+                userData.weeklyQuestions = [];
+                userData.answeredWeeklyQuestions = []; // Reset answered questions for new week
+                userData.lastWeekTimestamp = currentTime;
+                await assignNewWeeklyQuestions();
+                await updateUserData();
+                answeredQuestions.clear(); // Clear the local Set
+            }
+        }
+
+        // Add function to assign new weekly questions
+        async function assignNewWeeklyQuestions() {
+            // Create a copy of all questions to select from
+            const allQuestions = [...questionBank];
+            userData.weeklyQuestions = [];
+            
+            // Randomly select 10 questions
+            for (let i = 0; i < QUESTIONS_PER_WEEK && allQuestions.length > 0; i++) {
+                const randomIndex = Math.floor(Math.random() * allQuestions.length);
+                userData.weeklyQuestions.push(allQuestions[randomIndex].question);
+                allQuestions.splice(randomIndex, 1);
+            }
+            
+            console.log("Assigned new weekly questions:", userData.weeklyQuestions.length);
+        }
+    
+        // Update the question bank based on the saved data
+        function updateQuestionBank() {
+            const weeklyQuestions = questionBank.filter(q => 
+                userData.weeklyQuestions.includes(q.question)
+            );
+            
+            questionBank = weeklyQuestions;
+            
+            console.log("Updated question bank size:", questionBank.length);
+            
+            if (questionBank.length > 0) {
+                selectRandomQuestion();
+                displayQuestion();
+                displayQuestionLists();
+            } else {
+                console.error("No questions available in question bank");
+            }
+        }
+
+        // Select a weighted random question from the question bank
+        function selectRandomQuestion() {
+            if (questionBank.length === 0) {
+                currentQuestionIndex = -1;
+                return;
+            }
+
+            // If all questions have been answered, don't reset - just return
+            if (answeredQuestions.size >= questionBank.length) {
+                currentQuestionIndex = -1;
+                return;
+            }
+
+            // Get available questions (not yet answered)
+            const availableQuestions = questionBank.filter((_, index) => !answeredQuestions.has(index));
+            
+            if (availableQuestions.length === 0) {
+                currentQuestionIndex = -1;
+                return;
+            }
+
+            // Calculate total weight for available questions
+            let totalWeight = 0;
+            availableQuestions.forEach(question => {
+                const weight = userData.questionWeights[question.question] || 1;
+                totalWeight += weight;
+            });
+
+            // Generate random value between 0 and totalWeight
+            let random = Math.random() * totalWeight;
+            
+            // Find the question that corresponds to this weight
+            for (let i = 0; i < availableQuestions.length; i++) {
+                const weight = userData.questionWeights[availableQuestions[i].question] || 1;
+                random -= weight;
+                if (random <= 0) {
+                    currentQuestionIndex = questionBank.findIndex(q => q.question === availableQuestions[i].question);
+                    break;
+                }
+            }
+        }
+    
+        // Display the current question and choices
+        function displayQuestion() {
+            const questionDisplay = document.getElementById("questionDisplay");
+            const choicesSection = document.getElementById("choicesSection");
+            const choicesList = document.getElementById("choicesList");
+            const feedbackBox = document.getElementById("feedbackBox");
+            const nextButton = document.getElementById("nextButton");
+            const submitButton = document.getElementById("submitAnswerButton");
+
+            // Hide feedback box when displaying a new question
+            feedbackBox.style.display = "none";
+
+            // If all questions are answered, show completion message
+            if (answeredQuestions.size >= QUESTIONS_PER_WEEK) {
+                questionDisplay.innerText = `You have completed all questions for this week. Please return in ${getDaysUntilNextWeek()} days for new questions.`;
+                choicesSection.classList.add("hidden");
+                nextButton.classList.add("hidden");
+                submitButton.classList.add("hidden");
+                return;
+            }
+
+            if (currentQuestionIndex !== -1 && questionBank.length > 0) {
+                const currentQuestion = questionBank[currentQuestionIndex];
+                questionDisplay.innerText = currentQuestion.question;
+
+                // Display choices with radio button and bubble effect
+                choicesList.innerHTML = "";
+                currentQuestion.options.forEach((option, index) => {
+                    const li = document.createElement("li");
+                    const radioId = `choice${index}`;
+                    li.innerHTML = `<input type="radio" name="choice" id="${radioId}" value="${option}"> <label for="${radioId}" class="answer-option">${option}</label>`;
+                    choicesList.appendChild(li);
+                });
+
+                choicesSection.classList.remove("hidden");
+                submitButton.classList.remove("hidden");
+            } else {
+                questionDisplay.innerText = "No more questions available for this week.";
+                choicesSection.classList.add("hidden");
+                nextButton.classList.add("hidden");
+                submitButton.classList.add("hidden");
+            }
+        }
+    
+        // Handle the "Submit Answer" button click
+        document.getElementById("submitAnswerButton").addEventListener("click", async () => {
+            const selectedOption = document.querySelector("input[name='choice']:checked");
+
+            if (!selectedOption) {
+                alert("Please select an answer before submitting.");
+                return;
+            }
+
+            const userAnswer = selectedOption.value;
+            const currentQuestion = questionBank[currentQuestionIndex];
+            
+            // Add current question to answered questions both locally and in userData
+            answeredQuestions.add(currentQuestionIndex);
+            userData.answeredWeeklyQuestions = Array.from(answeredQuestions);
+            
+            // Update question weight based on answer with limits
+            const currentWeight = userData.questionWeights[currentQuestion.question] || 1;
+            if (userAnswer === currentQuestion.answer) {
+                // Decrease weight more significantly for correct answers (0.7x)
+                let newWeight = currentWeight * 0.7;
+                // Ensure weight doesn't go below 0.5
+                userData.questionWeights[currentQuestion.question] = Math.max(0.5, newWeight);
+                userData.correctQuestions.push(currentQuestion.question);
+            } else {
+                // Increase weight for incorrect answers (1.3x)
+                let newWeight = currentWeight * 1.3;
+                // Ensure weight doesn't exceed 2.0
+                userData.questionWeights[currentQuestion.question] = Math.min(2.0, newWeight);
+                userData.incorrectQuestions.push(currentQuestion.question);
+            }
+            
+            // Get custom feedback for the selected answer
+            const feedback = await getFeedbackForAnswer(currentQuestion, userAnswer);
+            displayFeedback(feedback);
+
+            // Update Firestore with new data including answered questions
+            await updateUserData();
+
+            // Hide the choices and show the next button
+            document.getElementById("choicesSection").classList.add("hidden");
+            document.getElementById("nextButton").classList.remove("hidden");
+
+            // Update the display to show new progress
+            displayQuestionLists();
+        });
+    
+        // Function to display feedback message
+        function displayFeedback(feedback) {
+            const feedbackBox = document.getElementById("feedbackBox");
+            const feedbackMessage = document.getElementById("feedbackMessage");
+            const correctAnswer = document.getElementById("correctAnswer");
+            const explanation = document.getElementById("explanation");
+    
+            feedbackBox.style.display = "block";
+            feedbackMessage.innerText = feedback.message;
+            correctAnswer.innerText = `Correct Answer: ${feedback.correctAnswer}`;
+            explanation.innerText = feedback.explanation;
+            feedbackBox.className = feedback.isCorrect ? "correct-feedback" : "incorrect-feedback";
+        }
+    
+        // Get feedback for a given answer
+        async function getFeedbackForAnswer(question, userAnswer) {
+            const isCorrect = userAnswer === question.answer;
+            const feedback = {
+                isCorrect,
+                message: isCorrect ? feedbackMessages.correct.default : feedbackMessages.incorrect.default,
+                correctAnswer: question.answer,
+                explanation: question.explanation // Always show the question's explanation
+            };
+            return feedback;
+        }
+    
+        // Handle the "Next Question" button click
+        document.getElementById("nextButton").addEventListener("click", () => {
+            if (answeredQuestions.size >= QUESTIONS_PER_WEEK) {
+                displayQuestion(); // This will show the completion message
+                return;
+            }
+
+            if (questionBank.length > 0) {
+                selectRandomQuestion();
+                displayQuestion();
+                displayQuestionLists();
+                document.getElementById("nextButton").classList.add("hidden");
+            }
+        });
+    
+        // Handle the "Logout" button click
+        document.getElementById("logoutButton").addEventListener("click", () => {
+            signOut(auth).then(() => {
+                window.location.href = "index.html";
+            });
+        });
+    
+        // Update the Firestore document with user data
+        async function updateUserData() {
+            const userId = auth.currentUser.uid;
+            const docRef = doc(db, "users", userId);
+            await updateDoc(docRef, userData);
+        }
+    
+        // Update the list of questions and their weights
+        function displayQuestionLists() {
+            const remainingQuestionsList = document.getElementById("remainingQuestionsList");
+            remainingQuestionsList.innerHTML = "";
+            
+            if (adminMode) {
+                const header = document.createElement("h3");
+                header.innerText = "Weekly Questions Progress";
+                remainingQuestionsList.appendChild(header);
+                
+                const totalQuestions = userData.weeklyQuestions.length;
+                const completedQuestions = answeredQuestions.size;
+                
+                const progressInfo = document.createElement("p");
+                progressInfo.innerHTML = `
+                    Completed: ${completedQuestions} / ${totalQuestions}<br>
+                    Days until next set: ${getDaysUntilNextWeek()} days
+                `;
+                remainingQuestionsList.appendChild(progressInfo);
+                
+                questionBank.forEach((q, index) => {
+                    const weight = (userData.questionWeights[q.question] || 1).toFixed(3);
+                    const li = document.createElement("li");
+                    li.innerHTML = `
+                        <strong>Question ${index + 1}:</strong> ${q.question}<br>
+                        <strong>Weight:</strong> ${weight}<br>
+                        <strong>Answer:</strong> ${q.answer}<br>
+                    `;
+                    remainingQuestionsList.appendChild(li);
+                });
+            } else {
+                const header = document.createElement("h3");
+                const totalQuestions = QUESTIONS_PER_WEEK;
+                const completedQuestions = answeredQuestions.size;
+                
+                header.innerHTML = `
+                    Weekly Questions Progress: ${completedQuestions} / ${totalQuestions}<br>
+                    Days until next set: ${getDaysUntilNextWeek()} days
+                `;
+                remainingQuestionsList.appendChild(header);
+            }
+        }
+
+        // Helper function to calculate days until next week
+        function getDaysUntilNextWeek() {
+            const currentTime = Date.now();
+            const oneWeek = 7 * 24 * 60 * 60 * 1000;
+            const nextWeekTime = userData.lastWeekTimestamp + oneWeek;
+            const daysRemaining = Math.ceil((nextWeekTime - currentTime) / (24 * 60 * 60 * 1000));
+            return Math.max(0, daysRemaining);
+        }
+
+        // Simplified admin mode toggle
+        document.addEventListener('keydown', (e) => {
+            if (e.key.length === 1) {
+                typedKeys += e.key.toLowerCase();
+                
+                if (typedKeys.length > 5) {
+                    typedKeys = typedKeys.slice(-5);
+                }
+
+                if (typedKeys === secretWord) {
+                    adminMode = !adminMode;
+                    typedKeys = '';
+                    displayQuestionLists(); // Update the display when admin mode toggles
+                }
+            }
+        });
+    </script>    
+</body>
+</html>
+
+
